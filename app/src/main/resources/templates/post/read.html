@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleag.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상세보기</title>
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/post/post.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+</head>
+
+<body>
+    <main id="board">
+        <header th:replace="~{/fix/header :: #post-header}"></header>
+        <section id="post-banner">
+            <div><a th:href="@{/post/write}"><img src="/images/post_banner.png"></a></div>
+        </section>
+        <section id="info-wrap" th:object="${post}">
+            <article id="info-container">
+                <h6 class="info">게시글 상세보기</h6>
+                <section class="order">
+                    <a href="javascript:void(0)">목록으로</a>
+                    <a th:href="@{/post/modify(id=*{id})}" class="update">수정</a>
+                    <a th:href="@{/post/remove(id=*{id})}" class="delete">삭제</a>
+                </section>
+            </article>
+            <section id="detail-title">
+                <h2 th:text="*{postTitle}"></h2>
+            </section>
+            <section id="detail-info">
+                <div class="profile">
+                    <div><img src="/images/profile.png" width="15px"></div>
+                    <h6 class="writer" th:text="*{memberName}"></h6>
+                </div>
+                <hr>
+                <h6 id="detail-read-count" th:text="*{'조회 ' + postReadCount}"></h6>
+                <hr>
+            </section>
+            
+            <h5 id="content" th:text="*{postContent}">
+            </h5>
+            <div id="thumbnail-list"></div>
+            <section id="reply-write-wrap">
+                <div class="profile">
+                    <div><img src="/images/profile.png" width="15px"></div>
+                    <h6 class="writer" th:text="*{memberName}"></h6>
+                </div>
+                <textarea cols="30" rows="1" placeholder="내 댓글"></textarea>
+                <button>작성완료</button>
+            </section>
+            <section id="replies-wrap">
+                <ul></ul>
+            </section>
+        </section>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<script src="/js/post/post.js"></script>
+<script th:inline="javascript">
+    let files = [[${post.files}]];
+    let postId = [[${post.id}]];
+    let memberId = [[${session.id}]];
+</script>
+<script src="/js/post/reply.js"></script>
+<script src="/js/post/thumbnail.js"></script>
+</html>

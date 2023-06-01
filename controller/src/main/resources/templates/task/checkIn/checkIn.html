@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Check In</title>
+</head>
+<body>
+<h1>출퇴근 등록 장치</h1>
+<form id="device">
+    <input type="text" name="name">
+    <input type="submit" id="get-to-work" value="출근">
+    <input type="submit" id="leave-work" value="퇴근">
+</form>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+    const $getToWork = $("#get-to-work");
+    const $leaveWork = $("#leave-work");
+    const $device = $("#device");
+
+    $getToWork.on("click", () => {
+        $device.attr("action", "/task/get-to-work");
+        $device.submit();
+    });
+
+    $leaveWork.on("click", () => {
+        $device.attr("action", "/task/leave-work");
+        $device.submit();
+    });
+</script>
+</html>

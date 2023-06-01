@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Result</title>
+</head>
+<body>
+<table border="1" th:object="${studentVO}">
+    <tr>
+        <th>학생 번호</th>
+        <th>국어 점수</th>
+        <th>영어 점수</th>
+        <th>수학 점수</th>
+        <th>총점</th>
+        <th>평균</th>
+    </tr>
+    <tr>
+        <td th:text="*{number}"></td>
+        <td th:text="*{kor}"></td>
+        <td th:text="*{eng}"></td>
+        <td th:text="*{math}"></td>
+        <td th:text="*{total}"></td>
+        <td th:text="*{average}"></td>
+    </tr>
+</table>
+</body>
+</html>

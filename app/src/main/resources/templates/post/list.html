@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleag.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>목록</title>
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/post/post.css">
+    <link rel="stylesheet" href="/css/header/header.css">
+</head>
+<body>
+    <main id="post">
+        <!--<header th:replace="~{/fix/header :: post-header}"></header>-->
+        <header th:replace="~{/fix/header :: #post-header}"></header>
+        <section id="post-banner">
+<!--    작성 폼으로 이동하는 버튼        -->
+            <div><a th:href="@{/post/write}"><img src="/images/post_banner.png"></a></div>
+        </section>
+        <section id="info-wrap">
+            <article id="info-container">
+<!--       게시글 개수         -->
+                <h6 class="info">게시글 목록<br><th:block th:text="${pagination.total} + '개'"></th:block></h6>
+                <section class="order">
+<!--        정렬            -->
+                    <a href="recent" class="order recent order-checked">최신순</a>
+                    <a href="popular" class="order popular">인기순</a>
+                </section>
+            </article>
+<!--     게시글 목록       -->
+            <section id="content-wrap">
+                <ul></ul>
+<!--        페이징 처리        -->
+                <div id="paging-wrap">
+                    <a th:if="${pagination.prev}" th:href="${pagination.startPage - 1}" class="change-page paging paging-move"><img src="/images/prev.png" width="15px"></a>
+                    <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
+                        <a th:if="${page eq pagination.page}" class="paging paging-checked" th:text="${page}"></a>
+                        <a th:unless="${page eq pagination.page}" th:href="${page}" class="change-page paging" th:text="${page}"></a>
+                    </th:block>
+                    <a th:if="${pagination.next}" th:href="${pagination.endPage + 1}" class="change-page paging paging-move"><img src="/images/next.png" width="15px"></a>
+                    <div></div>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+<script src="/js/post/post.js"></script>
+<!-- 타임리프문을 통해 자바스크립트로 데이터 불러오기 -->
+<script th:inline="javascript">
+    let posts = [[${posts}]];
+    let nowPage = [[${pagination.page}]]
+    let order = [[${search.order}]]
+    let memberId = [[${session.id}]];
+</script>
+<script src="/js/post/list.js"></script>
+<script src="/js/post/paging.js"></script>
+<script src="/js/post/order.js"></script>
+</html>

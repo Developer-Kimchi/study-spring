@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.PostMapper">
+    <sql id="search">
+        <if test="search.type != null and !search.type.equals('')">
+            <trim prefix="AND(" prefixOverrides="OR" suffix=")">
+                <foreach item="type" collection="search.types">
+                    <trim prefix="OR">
+                        <choose>
+                            <when test="type=='t'.toString()">
+                                POST_TITLE LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                            <when test="type=='c'.toString()">
+                                POST_CONTENT LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                            <when test="type=='w'.toString()">
+                                MEMBER_NAME LIKE '%'||#{search.keyword}||'%'
+                            </when>
+                        </choose>
+                    </trim>
+                </foreach>
+            </trim>
+        </if>
+    </sql>
+    <select id="selectAll" resultType="postDTO">
+        SELECT P.ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_READ_COUNT, P.MEMBER_ID, MEMBER_NAME
+        FROM
+        (
+            SELECT ROWNUM R, P.ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_READ_COUNT,
+            P.MEMBER_ID, MEMBER_NAME
+            FROM
+            (
+                SELECT P.ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_READ_COUNT, P.MEMBER_ID, MEMBER_NAME
+                FROM TBL_MEMBER M JOIN TBL_POST P
+                ON M.ID = P.MEMBER_ID
+                ORDER BY
+                <choose>
+                    <when test="search.order == 'popular'">
+                        POST_READ_COUNT
+                    </when>
+                    <otherwise>
+                        P.ID
+                    </otherwise>
+                </choose>
+                DESC
+            ) P
+            <![CDATA[
+                WHERE ROWNUM <= #{pagination.page} * #{pagination.rowCount}
+            ]]>
+            <include refid="search"/>
+        <![CDATA[
+        ) P WHERE R > (#{pagination.page} - 1) * #{pagination.rowCount}
+        ]]>
+    </select>
+    <insert id="insert">
+        <selectKey keyProperty="id" order="BEFORE" resultType="long">
+            SELECT SEQ_POST.NEXTVAL FROM DUAL
+        </selectKey>
+        INSERT INTO TBL_POST(ID, POST_TITLE, POST_CONTENT, MEMBER_ID)
+        VALUES(#{id}, #{postTitle}, #{postContent}, #{memberId})
+    </insert>
+
+    <select id="select" resultType="postDTO">
+        SELECT P.ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, POST_READ_COUNT, P.MEMBER_ID, MEMBER_NAME
+        FROM TBL_MEMBER M JOIN TBL_POST P
+        ON M.ID = P.MEMBER_ID AND P.ID = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_POST
+        SET POST_TITLE = #{postTitle}, POST_CONTENT = #{postContent}, POST_UPDATE_DATE = SYSDATE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_POST WHERE ID = #{id}
+    </delete>
+
+    <select id="selectCountOfPost" resultType="_int">
+        SELECT COUNT(P.ID)
+        FROM TBL_MEMBER M JOIN TBL_POST P
+        ON M.ID = P.MEMBER_ID
+        <include refid="search"/>
+    </select>
+
+    <update id="updateReadCount">
+        UPDATE TBL_POST
+        SET POST_READ_COUNT = POST_READ_COUNT + 1
+        WHERE ID = #{id}
+    </update>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

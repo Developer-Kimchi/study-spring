@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleag.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/header/header.css">
+</head>
+<body>
+<!--<header th:fragment="post-header">-->
+<header id="post-header">
+    <div id="header">
+        <div id="logo">
+            <img src="/images/logo.png">
+        </div>
+        <div id="search">
+            <div class="search-wrap">
+                <form th:action="@{/post/list}" name="search-form">
+			        <div>
+			        	<select name="type">
+			        		<option value="tcw" th:selected="${search != null and search.type eq 'tcw'}">전체</option>
+			        		<option value="t" th:selected="${search != null and search.type eq 't'}">제목</option>
+			        		<option value="c" th:selected="${search != null and search.type eq 'c'}">내용</option>
+			        		<option value="w" th:selected="${search != null and search.type eq 'w'}">작성자</option>
+			        		<option value="cw" th:selected="${search != null and search.type eq 'cw'}">내용 또는 작성자</option>
+			        	</select>
+			        </div>
+                    <div class="search-container">
+                        <input type="text" autocomplete="off" name="keyword" th:value="${search != null ? search.keyword : ''}">
+                        <button type="submit" onclick=""><img src="/images/search.png"
+                                width="20px"></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="category">
+            <div>
+                <a th:href="@{/member/logout}">로그아웃</a>
+            </div>
+        </div>
+    </div>
+</header>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

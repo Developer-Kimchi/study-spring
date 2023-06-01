@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.app.mapper.FileMapper">
+    <select id="selectAll" resultType="fileVO">
+        SELECT ID, FILE_PATH, FILE_UUID, FILE_NAME, FILE_SIZE, POST_ID, FILE_TYPE
+        FROM TBL_FILE
+        WHERE POST_ID = #{postId}
+        ORDER BY FILE_TYPE DESC
+    </select>
+
+    <insert id="insert">
+        INSERT INTO TBL_FILE
+        (ID, FILE_PATH, FILE_UUID, FILE_NAME, FILE_SIZE, POST_ID, FILE_TYPE)
+        VALUES(SEQ_FILE.NEXTVAL, #{filePath}, #{fileUuid}, #{fileName}, #{fileSize}, #{postId}, #{fileType})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM TBL_FILE WHERE ID = #{id}
+    </delete>
+
+    <delete id="deleteAll">
+        DELETE FROM TBL_FILE WHERE POST_ID = #{postId}
+    </delete>
+</mapper>

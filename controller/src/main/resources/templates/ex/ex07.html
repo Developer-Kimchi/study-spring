@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>EX07</title>
+</head>
+<body>
+<!--    <th:block th:each="data : ${datas}">-->
+<!--        <h1 th:text="${data}"></h1>-->
+<!--    </th:block>-->
+    <th:block th:each="data : ${#numbers.sequence(1, 10)}">
+        <h1 th:text="${data}"></h1>
+    </th:block>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script th:inline="javascript">
+    // let datas = [[${datas}]];
+    // let text = "";
+    // datas.forEach(data => {
+    //     $(document.body).append(`<h1>${data}</h1>`)
+    // });
+</script>
+</html>

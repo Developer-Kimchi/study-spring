@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Product</title>
+</head>
+<body th:object="${productVO}">
+<form th:action="@{/task/product}" method="post">
+    <input type="text" th:field="*{productName}" placeholder="상품 이름">
+    <input type="text" th:field="*{productPrice}" placeholder="상품 가격">
+    <input type="text" th:field="*{productStock}" placeholder="상품 재고">
+    <input type="text" th:field="*{productBrand}" placeholder="상품 브랜드">
+    <input type="submit" value="전송">
+</form>
+<!--<th:block th:if="${not #strings.isEmpty(productVO.productName)}">-->
+<!--<th:block th:if="*{not (productName eq null)}">-->
+<th:block th:if="*{productName != null}">
+    <table border="1">
+        <tr>
+            <th>상품 이름</th>
+            <th>상품 가격</th>
+            <th>상품 재고</th>
+            <th>상품 브랜드</th>
+        </tr>
+        <tr>
+            <td id="name"></td>
+            <td id="price"></td>
+            <td id="stock"></td>
+            <td id="brand"></td>
+        </tr>
+    </table>
+</th:block>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script th:inline="javascript">
+    let product = [[${productVO}]];
+    if(product.productName){
+        with(product){
+            $("#name").text(productName);
+            $("#price").text(productPrice);
+            $("#stock").text(productStock);
+            $("#brand").text(productBrand);
+        }
+    }
+</script>
+</html>

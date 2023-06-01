@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0/EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <typeAliases>
+        <typeAlias type="com.example.mybatis.domain.OrderDTO" alias="orderDTO"/>
+        <typeAlias type="com.example.mybatis.domain.Order" alias="order"/>
+        <typeAlias type="com.example.mybatis.domain.Product" alias="product"/>
+        <typeAlias type="com.example.mybatis.domain.ProductOrder" alias="productOrder"/>
+    </typeAliases>
+</configuration>

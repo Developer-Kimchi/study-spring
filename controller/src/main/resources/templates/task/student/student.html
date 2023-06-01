@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Student</title>
+</head>
+<body>
+<form th:action="@{/task/student}" method="post" th:object="${studentVO}">
+    <input type="text" th:field="*{number}" placeholder="학생 번호">
+    <input type="text" th:field="*{kor}" placeholder="국어 점수">
+    <input type="text" th:field="*{eng}" placeholder="영어 점수">
+    <input type="text" th:field="*{math}" placeholder="수학 점수">
+    <input type="submit" value="전송">
+</form>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleag.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/member/member.css">
+    <link rel="stylesheet" href="/css/member/term.css">
+    <link rel="stylesheet" href="/css/member/info.css">
+    <link rel="stylesheet" href="/css/modal/modal.css">
+    <title>로그인</title>
+</head>
+<body>
+    <main id="login">
+        <div class="modal">
+            <div class="warn-modal">
+                <div id="content-wrap"></div>
+            </div>
+        </div>
+        <section id="login-container">
+            <div id="logo">
+                <img src="/images/logo.png">
+            </div>
+            <article>
+                <div class="login">
+                    <h2 id="title">
+                        스프링부트 로그인
+                    </h2>
+                    <h5>스프링부트 아이디로<br>모든 스프링부트 서비스를 이용할 수 있습니다.</h5>
+                </div>
+                <form th:action="@{/member/login}" name="login" method="post" th:object="${memberVO}">
+                    <div class="login">
+                        <div class="info-container info-container-first">
+                            <span>
+                                <input type="text" id="id" th:field="*{memberId}" autocomplete="off" placeholder="아이디">
+                                <img width="16px">
+                            </span>
+                            <p class="help"></p>
+                        </div>
+                        <div class="info-container">
+                            <span>
+                                <div class="password">
+                                    <input type="password" id="password" th:field="*{memberPassword}" placeholder="비밀번호">
+                                    <img width="16px">
+                                    <p class="help"></p>
+                                </div>
+                            </span>
+                        </div>
+                        <button type="button" class="login" onclick="send()">로그인</button>
+                        <button type="button" class="join" onclick="">회원가입</button>
+                    </div>
+                </form>
+            </article>
+        </section>
+    </main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="/js/member/login.js"></script>
+<script src="/js/modal/modal.js"></script>
+<script th:inline="javascript">
+    let check = [[${login}]];
+    if(check){
+        showWarnModal("<span>아이디 또는 비밀번호를</span><span>확인해주세요.</span>");
+    }
+</script>
+</html>

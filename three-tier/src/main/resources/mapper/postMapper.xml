@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.threetier.mapper.PostMapper">
+    <insert id="insert">
+        INSERT INTO TBL_POST(ID, POST_TITLE, POST_CONTENT, MEMBER_NAME)
+        VALUES(SEQ_POST.NEXTVAL, #{postTitle}, #{postContent}, #{memberName})
+    </insert>
+
+    <select id="selectAll" resultType="postVO">
+        SELECT ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, MEMBER_NAME
+        FROM TBL_POST
+    </select>
+
+    <select id="select" resultType="postVO">
+        SELECT ID, POST_TITLE, POST_CONTENT, POST_REGISTER_DATE, POST_UPDATE_DATE, MEMBER_NAME
+        FROM TBL_POST WHERE ID = #{id}
+    </select>
+
+    <update id="update">
+        UPDATE TBL_POST
+        SET POST_TITLE = #{postTitle}, POST_CONTENT = #{postContent}, POST_UPDATE_DATE = SYSDATE
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM TBL_POST WHERE ID = #{id}
+    </delete>
+</mapper>
