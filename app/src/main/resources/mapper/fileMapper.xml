@@ -21,4 +21,29 @@
     <delete id="deleteAll">
         DELETE FROM TBL_FILE WHERE POST_ID = #{postId}
     </delete>
+
+    <select id="selectYesterday" resultType="fileVO">
+        SELECT ID, FILE_PATH, FILE_UUID, FILE_NAME, FILE_SIZE, POST_ID, FILE_TYPE
+        FROM TBL_FILE WHERE FILE_PATH = TO_CHAR(SYSDATE - 1, 'YYYY/MM/DD')
+    </select>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

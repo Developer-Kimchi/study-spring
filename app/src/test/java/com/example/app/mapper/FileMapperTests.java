@@ -8,6 +8,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.io.File;
+import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -45,5 +48,15 @@ public class FileMapperTests {
     public void deleteAllTest(){
         fileMapper.deleteAll(22L);
         assertThat(fileMapper.selectAll(22L)).hasSize(0);
+    }
+
+    @Test
+    public void selectYesterdayTest(){
+        final File file = Paths.get("C:/upload", "2023/05/31").toFile();
+
+        Arrays.stream(file.listFiles()).forEach(f -> log.info(f.getAbsolutePath()));
+        Arrays.stream(file.listFiles()).forEach(f -> log.info(f.getName()));
+
+//        log.info(fileMapper.selectYesterday().toString());
     }
 }

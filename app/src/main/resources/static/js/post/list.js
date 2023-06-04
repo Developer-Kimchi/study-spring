@@ -21,9 +21,7 @@ $(document).ready(function(){
                                 <span class="date">${elapsedTime(post.postRegisterDate)}</span>
                             </h6>
                         </section>
-       
         `
-        // 게시글 대표사진 여부 검사
         post.files.forEach(file => {
             if(file.fileType == "REPRESENTATIVE"){
                 text += `<img src="/files/display?fileName=${file.filePath}/t_${file.fileUuid}_${file.fileName}" class="preview">`;

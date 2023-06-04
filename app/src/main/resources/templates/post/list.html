@@ -14,23 +14,18 @@
         <!--<header th:replace="~{/fix/header :: post-header}"></header>-->
         <header th:replace="~{/fix/header :: #post-header}"></header>
         <section id="post-banner">
-<!--    작성 폼으로 이동하는 버튼        -->
             <div><a th:href="@{/post/write}"><img src="/images/post_banner.png"></a></div>
         </section>
         <section id="info-wrap">
             <article id="info-container">
-<!--       게시글 개수         -->
                 <h6 class="info">게시글 목록<br><th:block th:text="${pagination.total} + '개'"></th:block></h6>
                 <section class="order">
-<!--        정렬            -->
                     <a href="recent" class="order recent order-checked">최신순</a>
                     <a href="popular" class="order popular">인기순</a>
                 </section>
             </article>
-<!--     게시글 목록       -->
             <section id="content-wrap">
                 <ul></ul>
-<!--        페이징 처리        -->
                 <div id="paging-wrap">
                     <a th:if="${pagination.prev}" th:href="${pagination.startPage - 1}" class="change-page paging paging-move"><img src="/images/prev.png" width="15px"></a>
                     <th:block th:each="page:${#numbers.sequence(pagination.startPage, pagination.endPage)}">
@@ -47,7 +42,6 @@
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
 <script src="/js/post/post.js"></script>
-<!-- 타임리프문을 통해 자바스크립트로 데이터 불러오기 -->
 <script th:inline="javascript">
     let posts = [[${posts}]];
     let nowPage = [[${pagination.page}]]

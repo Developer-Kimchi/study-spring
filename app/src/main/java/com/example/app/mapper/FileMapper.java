@@ -18,4 +18,7 @@ public interface FileMapper {
 
 //    파일 조회
     public List<FileVO> selectAll(Long postId);
+
+//    어제 날짜 파일 조회
+    public List<FileVO> selectYesterday();
 }

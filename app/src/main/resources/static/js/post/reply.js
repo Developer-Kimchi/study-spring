@@ -7,7 +7,6 @@ let page = 1;
 /*=======================================================================*/
 let replyService = (function(){
 
-    //댓글 조회
     function getList(callback){
         $.ajax({
             url: `/replies/list/${postId}/${page}`,
@@ -19,7 +18,6 @@ let replyService = (function(){
         });
     }
 
-    //댓글 삭제
     function remove(replyId, callback){
         $.ajax({
             url: `/replies/${replyId}`,
@@ -32,7 +30,6 @@ let replyService = (function(){
         });
     }
 
-    // 댓글 작성
     function write(replyContent, callback){
         $.ajax({
             url: `/replies/write`,
@@ -46,7 +43,7 @@ let replyService = (function(){
             }
         })
     }
-    //댓글 수정
+
     function modify(reply, callback){
         $.ajax({
             url: "/replies/modify",

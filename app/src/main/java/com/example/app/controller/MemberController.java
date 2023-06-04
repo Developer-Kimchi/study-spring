@@ -47,7 +47,6 @@ public class MemberController {
             session.setAttribute("id", foundMember.get());
             return new RedirectView("/post/list");
         }
-//        Flash 속성 -> redirect가 완료될 때까지만 저장되는 일회성 session
         redirectAttributes.addFlashAttribute("login", "fail");
         return new RedirectView("/member/login");
     }
@@ -55,7 +54,6 @@ public class MemberController {
 //    로그아웃
     @GetMapping("logout")
     public RedirectView logout(HttpSession session){
-//        세션 종료
         session.invalidate();
         return new RedirectView("/member/login");
     }

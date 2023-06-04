@@ -17,12 +17,12 @@ import java.util.List;
 public class ReplyController {
 
     private final ReplyService replyService;
-// 게시글 작성
+
     @PostMapping("write")
     public void write(@RequestBody ReplyVO replyVO){
         replyService.write(replyVO);
     }
-// 게시글 조회
+
     @GetMapping("list/{postId}/{page}")
     public List<ReplyDTO> getList(@PathVariable int page, @PathVariable Long postId){
         final Pagination pagination = new Pagination();

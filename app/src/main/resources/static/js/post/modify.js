@@ -6,7 +6,6 @@ const $thumbnail = $("label.attach img.thumbnail");
 let sizes = new Array(4).fill(0);
 const fileIdsForDelete = new Array();
 
-// 사진 사이즈 보여주기
 function showSize(span){
     if(span.text() == 0){
         span.hide();
@@ -47,7 +46,6 @@ files.filter(file => file.fileType != "REPRESENTATIVE").forEach((file, i) => {
     showSize($("span.file-size").eq(i + 1));
 });
 
-//파일 업로드
 $upload.on("change", function(e){
     let i = $upload.index($(this));
     let files = $(this)[0].files;
@@ -87,7 +85,6 @@ $upload.on("change", function(e){
     });
 });
 
-// 파일 삭제
 $("div.x").on("click", function(e){
     e.preventDefault();
     let i = $("div.x").index($(this));
@@ -106,7 +103,7 @@ $("div.x").on("click", function(e){
     $thumbnail.eq(i).removeClass("original");
 });
 
-// 게시글 수정 등록시
+
 $("button.ok-button").on("click", function(){
     let text = ``;
     let count = 0;

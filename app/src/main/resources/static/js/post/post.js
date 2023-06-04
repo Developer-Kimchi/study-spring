@@ -19,7 +19,6 @@ $search.on("blur", function(){
     $("div.search-container").css("outline", "none");
 });
 
-//썸네일 띄우기
 let sizes = new Array(4).fill(0);
 $upload.on("change", function(e){
     let i = $upload.index($(this));
@@ -74,7 +73,6 @@ $upload.on("change", function(e){
     // }
 });
 
-// 썸네일 나올 때 x버튼을 클릭시
 $("div.x").on("click", function(e){
     e.preventDefault();
     let i = $("div.x").index($(this));
@@ -86,7 +84,6 @@ $("div.x").on("click", function(e){
     $thumbnail.eq(i).hide();
 });
 
-// 게시글 작성 버튼 클릭시 아래와 같이 인풋태그 생성
 $("button.ok-button").on("click", function(){
     let text = ``;
     let count = 0;

@@ -23,14 +23,10 @@ import javax.servlet.http.HttpSession;
 @RequiredArgsConstructor
 @RequestMapping("/post/*")
 public class PostController {
-//    서비스 객체
     private final PostService postService;
-//    회원 객체
     private final MemberService memberService;
-//    세션 가져오기
     private final HttpSession session;
 
-//    리스트로 이동
     @GetMapping("list")
     public void list(Pagination pagination, Search search, Model model){
         pagination.setTotal(postService.getTotal(search));

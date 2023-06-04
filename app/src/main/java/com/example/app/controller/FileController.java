@@ -27,34 +27,23 @@ public class FileController {
     @PostMapping("upload")
     @ResponseBody
     public List<String> upload(@RequestParam("uploadFile") List<MultipartFile> uploadFiles) throws IOException {
-//        파일 경로 설정
         String path = "C:/upload/" + getPath();
-//        파일 uuid 설정
         List<String> uuids = new ArrayList<>();
-//        파일 객체 생성
         File file = new File(path);
-//        파일이 존재한다면 경로를 만들어라
         if(!file.exists()){file.mkdirs();}
 
-//        반복문으로 파일 만들기
         for (int i=0; i<uploadFiles.size(); i++){
-//            uuid 생성
             uuids.add(UUID.randomUUID().toString());
-//            파일 경로 및 이름 생성
             uploadFiles.get(i).transferTo(new File(path, uuids.get(i) + "_" + uploadFiles.get(i).getOriginalFilename()));
-//            콘텐트 타입이 "image"로 시작한다면
             if(uploadFiles.get(i).getContentType().startsWith("image")){
-//                썸네일용 파일 생성
                 FileOutputStream out = new FileOutputStream(new File(path, "t_" + uuids.get(i) + "_" + uploadFiles.get(i).getOriginalFilename()));
                 Thumbnailator.createThumbnail(uploadFiles.get(i).getInputStream(), out, 100, 100);
-//                경로 닫아주기
                 out.close();
             }
         }
         return uuids;
     }
 
-//    파일 경로는 현재 날짜로 지정
     public String getPath(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
     }
@@ -62,7 +51,6 @@ public class FileController {
 //    파일 불러오기
     @GetMapping("display")
     @ResponseBody
-//    바이트 단위 리턴
     public byte[] display(String fileName) throws IOException{
         return FileCopyUtils.copyToByteArray(new File("C:/upload/", fileName));
     }
